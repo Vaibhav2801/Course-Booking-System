@@ -26,6 +26,7 @@ router.post('/register',(req,res)=>{
                     duration:req.body.duration,
                     capacity:req.body.capacity,
                 })
+              
                 newCourse.save()
                 .then(course=> res.json(course))
                 .catch(err => console.log(err));

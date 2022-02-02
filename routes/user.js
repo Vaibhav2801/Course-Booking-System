@@ -26,7 +26,6 @@ router.post('/register',(req,res)=>{
                }
                else {
                    course.regCount+=1
-                   //console.log(course)
                    course.save()
                    .then(user => res.json(user))
                    .catch(err => console.log(err))
@@ -53,21 +52,20 @@ router.delete('/slot/:_id',(req,res)=>{
     User.findOneAndDelete({_id:req.params._id})
     .then(user => {
          deleteduser=user
-         console.log(user)
         const x=Date.now()
         if(user.status==="CONFIRM"){
         Course.findById({_id:user.courseid})
         .then(course=>{
-             // const y=Date.parse(course.start_time)-Date.parse(x);
+              const y=Date.parse(course.start_time)
+              const z=y-x
             course.regCount-=1
             totcount=course.capacity
             count=course.regCount
-                    course.save()
-            .then(course => res.json(course))
+            course.save()
+            .then(course => res.json(course))   
             .catch(err => console.log(err))
             
-            if(count<totcount){
-                console.log(1)
+            if(count<totcount && z>=1800000){     
              User.findOne({status:"WAITING",courseid:deleteduser.courseid})
              .sort({createdAt:1})
              .then(users=>{
@@ -92,9 +90,8 @@ router.delete('/slot/:_id',(req,res)=>{
 
         })
         .catch(err => console.log(err))
-    }
+        }
     else     return res.status(200).json('User deleted')
-    
     })
     .catch(err => console.log(err))
     
