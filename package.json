@@ -1,0 +1,22 @@
+{
+  "name": "course-booking-system",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index..js",
+    "server": "nodemon index.js"
+  },
+  "author": "Vaibhav Garg",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2",
+    "mongodb": "^4.3.1",
+    "mongoose": "^6.1.9",
+    "validator": "^13.7.0"
+  }
+}
