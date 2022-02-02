@@ -46,6 +46,7 @@ npm install
 
 To run this project locally, you can run the following command. 
 
+
 #### Using npm
 ```sh
 npm run server
@@ -59,5 +60,6 @@ npm run server
 | POST | /users/register | Register  users |
 | DELETE | /users/slots/:_id | Delete users |
 
+**Note:**  While Registering Course in start_time format should be like YYYY-MM-DDTHH:MM:SSZ
 
 
