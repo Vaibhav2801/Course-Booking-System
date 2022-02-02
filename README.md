@@ -60,6 +60,7 @@ npm run server
 | POST | /users/register | Register  users |
 | DELETE | /users/slots/:_id | Delete users |
 
-**Note:**  While Registering Course in start_time format should be like YYYY-MM-DDTHH:MM:SSZ
-
+**Note:**  
+1. While Registering Course in start_time format should be like YYYY-MM-DDTHH:MM:SSZ
+2. In /config/keys.js file enter your Mongo Atlas user password and database name.
 
