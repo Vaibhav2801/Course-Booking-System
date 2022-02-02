@@ -1,30 +1,8 @@
-[![csivit][csivitu-shield]][csivitu-url]
-[![Issues][issues-shield]][issues-url]
 
-<!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/csivitu/slot-booking-system">
-    <img src="https://csivit.com/images/favicon.png" alt="Logo" width="80">
-  </a>
-
-  <h3 align="center">slot-booking-system</h3>
-
-  <p align="center">
-    A system to manage slots for CCS and other CSI events.
-    <br />
-    <a href="https://github.com/csivitu/slot-booking-system"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/csivitu/slot-booking-system">View Demo</a>
-    ·
-    <a href="https://github.com/csivitu/slot-booking-system/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/csivitu/slot-booking-system/issues">Request Feature</a>
-  </p>
+  <h3 align="center">Course-Booking-System</h3>
 </p>
-
-
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
