@@ -1,5 +1,5 @@
 module.exports={
-    mongoURL:"mongodb+srv://vaibhav:vaibhav123@cluster0.zrtkk.mongodb.net/booking-system?retryWrites=true&w=majority"
+    mongoURL:"mongodb+srv://<user>:<password>@cluster0.zrtkk.mongodb.net/<database_name>?retryWrites=true&w=majority"
 }
 
 
