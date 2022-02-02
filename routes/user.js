@@ -47,13 +47,18 @@ router.post('/register',(req,res)=>{
 router.delete('/slot/:_id',(req,res)=>{
     User.findOneAndDelete({_id:req.params._id})
     .then(user => {
+        const x=Date.now.toString()
+        const y;
         Course.findById({_id:user.courseid})
         .then(course=>{
             course.regCount-=1
+            y=Date.parse(course.start_time)-Date.parse(x);
             course.save()
             .then(user => res.json(user))
             .catch(err => console.log(err))
         })
+
+        if(y>=1800000){
         User.findOne({status:"WAITING",courseid:user.courseid})
         .sort({createdAt:1})
         .then(user=>{
@@ -71,6 +76,7 @@ router.delete('/slot/:_id',(req,res)=>{
             })
         })
         res.status(204).json(user1);
+    }
     })
     .catch(err =>  res.status(404).json(err))
 
