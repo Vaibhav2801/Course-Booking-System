@@ -7,7 +7,8 @@ const Course=require('../models/courses')
 // @desc  Register user 
 // @access Public
 router.post('/register',(req,res)=>{
-    User.findOne({ email: req.body.email }).then(user => {
+    User.findOne({ email: req.body.email })
+    .then(user => {
         if (user)   return res.status(400).json('Email already exists');
          else {
             const newUser=new User({
@@ -36,8 +37,10 @@ router.post('/register',(req,res)=>{
                    .catch(err => console.log(err))
                }
            })
+           .catch(err => console.log(err))
         }
     })
+    .catch(err => console.log(err))
 })
 
 //@route DELETE /users/registration
@@ -45,44 +48,59 @@ router.post('/register',(req,res)=>{
 //@access public
 
 router.delete('/slot/:_id',(req,res)=>{
+    var deleteduser
+    var totcount,count
     User.findOneAndDelete({_id:req.params._id})
     .then(user => {
-        const x=Date.now.toString()
-        const y;
+         deleteduser=user
+         console.log(user)
+        const x=Date.now()
+        if(user.status==="CONFIRM"){
         Course.findById({_id:user.courseid})
         .then(course=>{
+             // const y=Date.parse(course.start_time)-Date.parse(x);
             course.regCount-=1
-            y=Date.parse(course.start_time)-Date.parse(x);
-            course.save()
-            .then(user => res.json(user))
+            totcount=course.capacity
+            count=course.regCount
+                    course.save()
+            .then(course => res.json(course))
             .catch(err => console.log(err))
-        })
+            
+            if(count<totcount){
+                console.log(1)
+             User.findOne({status:"WAITING",courseid:deleteduser.courseid})
+             .sort({createdAt:1})
+             .then(users=>{
+                 users.status="CONFIRM"   
+                 console.log(users)
+                 users.save()
+                 .then(users => res.json(users))   
+                 .catch(err => console.log(err))
+     
+                 Course.findById({_id:users.courseid})
+                 .then(course => {
+                     course.regCount+=1
+                     course.save()
+                     .then(course => res.json(course))
+                     .catch(err => console.log(err))
+                 })
+             })
+             .catch(err => console.log(err))
+         }
 
-        if(y>=1800000){
-        User.findOne({status:"WAITING",courseid:user.courseid})
-        .sort({createdAt:1})
-        .then(user=>{
-            user.status="CONFIRM"
-            user.save()
-            .then(user => res.json(user))
-            .catch(err => console.log(err))
 
-            Course.findById({_id:user.courseid})
-            .then(course=>{
-                course.regCount+=1
-                course.save()
-                .then(user => res.json(user))
-                .catch(err => console.log(err))
-            })
+
         })
-        res.status(204).json(user1);
+        .catch(err => console.log(err))
     }
-    })
-    .catch(err =>  res.status(404).json(err))
-
+    else     return res.status(200).json('User deleted')
     
-
-})
+    })
+    .catch(err => console.log(err))
+    
+      
+       
+    })
 
 
 
